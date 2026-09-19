@@ -270,7 +270,7 @@ export function ShiftList({ shifts, isManager, users, currentUserId }: ShiftList
                   {!isManager && shift.userId === null && (
                     <div className="flex gap-1 shrink-0">
                       <Button
-                        variant="default"
+                        variant="primary"
                         size="sm"
                         onClick={() => handleClaimShift(shift.id)}
                       >

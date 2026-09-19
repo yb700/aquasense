@@ -74,7 +74,7 @@ export default async function CleaningPage() {
   });
 
   // Transform data to include most recent completion info at the top level
-  const tasksWithCompletion = tasks.map(task => ({
+  const tasksWithCompletion = tasks.map((task: any) => ({
     id: task.id,
     title: task.title,
     frequency: task.frequency,

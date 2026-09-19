@@ -22,8 +22,8 @@ import { useToast } from '@/hooks/use-toast';
 const copyFormSchema = z.object({
   sourceMonth: z.string().regex(/^\d{4}-\d{2}$/, 'Must be YYYY-MM'),
   targetMonth: z.string().regex(/^\d{4}-\d{2}$/, 'Must be YYYY-MM'),
-  keepAssignments: z.boolean().default(false),
-  onlyRoutine: z.boolean().default(false),
+  keepAssignments: z.boolean(),
+  onlyRoutine: z.boolean(),
 });
 
 type CopyFormValues = z.infer<typeof copyFormSchema>;

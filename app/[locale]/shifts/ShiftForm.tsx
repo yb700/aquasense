@@ -89,7 +89,7 @@ const shiftFormSchema = z.object({
   startTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format (HH:MM)'),
   endTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Invalid time format (HH:MM)'),
   notes: z.string().optional(),
-  isRoutine: z.boolean().optional().default(false),
+  isRoutine: z.boolean(),
 }).refine((data) => {
   // Validate that end time is after start time
   const [startHour, startMin] = data.startTime.split(':').map(Number);
