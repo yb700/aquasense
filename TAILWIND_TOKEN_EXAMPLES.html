@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSense Tailwind Token Examples</title>
+    <style>
+        /* This demonstrates that Tailwind config is properly extended */
+        body { font-family: Inter, system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-foreground p-8">
+    <h1 class="text-4xl font-bold mb-8">AquaSense Tailwind Configuration Examples</h1>
+    
+    <!-- Color Tokens -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Color Tokens</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-deep-ocean p-4 rounded-md text-white">Deep Ocean (Primary)</div>
+            <div class="bg-pool-blue p-4 rounded-md text-white">Pool Blue (Secondary)</div>
+            <div class="bg-aqua p-4 rounded-md text-white">Aqua (Accent)</div>
+            <div class="bg-fresh-mint p-4 rounded-md">Fresh Mint (Highlight)</div>
+        </div>
+    </section>
+
+    <!-- Shadow Tokens -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Shadow Tokens</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-card p-4 rounded-md shadow-sm">shadow-sm</div>
+            <div class="bg-card p-4 rounded-md shadow-md">shadow-md</div>
+            <div class="bg-card p-4 rounded-md shadow-lg">shadow-lg</div>
+            <div class="bg-card p-4 rounded-md shadow-water">shadow-water</div>
+        </div>
+    </section>
+
+    <!-- Border Radius Tokens -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Border Radius Tokens</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-primary-500 text-white p-4 rounded-sm">rounded-sm (6px)</div>
+            <div class="bg-primary-500 text-white p-4 rounded-md">rounded-md (12px)</div>
+            <div class="bg-primary-500 text-white p-4 rounded-lg">rounded-lg (16px)</div>
+            <div class="bg-primary-500 text-white p-4 rounded-full w-32 h-32 flex items-center justify-center">rounded-full</div>
+        </div>
+    </section>
+
+    <!-- Spacing Tokens -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Spacing Tokens (4px base unit)</h2>
+        <div class="space-y-2">
+            <div class="bg-accent-300 p-2">p-2 (8px)</div>
+            <div class="bg-accent-300 p-4">p-4 (16px)</div>
+            <div class="bg-accent-300 p-6">p-6 (24px)</div>
+            <div class="bg-accent-300 p-8">p-8 (32px)</div>
+        </div>
+    </section>
+
+    <!-- Motion Classes -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Motion & Animation</h2>
+        <div class="space-x-4">
+            <button class="bg-pool-blue text-white px-6 py-3 rounded-md transition-all duration-base ease-water-flow hover:scale-105 hover:shadow-lg">
+                Water Flow Transition
+            </button>
+            <button class="bg-aqua text-white px-6 py-3 rounded-md transition-all duration-slow ease-water-ripple hover:scale-105">
+                Water Ripple Transition
+            </button>
+        </div>
+    </section>
+
+    <!-- Touch Targets -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Touch Targets (44px minimum)</h2>
+        <button class="bg-primary-500 text-white touch-target rounded-md px-4">
+            Touch-optimized Button
+        </button>
+    </section>
+
+    <!-- Dark Mode Toggle Demo -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Dark Mode Support</h2>
+        <div class="bg-card dark:bg-card p-6 rounded-lg shadow-md dark:shadow-dark-md">
+            <p class="text-foreground dark:text-foreground mb-4">
+                This card adapts to dark mode when .dark class is added to html element
+            </p>
+            <button 
+                onclick="document.documentElement.classList.toggle('dark')"
+                class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:opacity-90 transition-opacity"
+            >
+                Toggle Dark Mode
+            </button>
+        </div>
+    </section>
+
+    <!-- Typography Examples -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Typography Scale</h2>
+        <div class="space-y-2">
+            <p class="text-xs">Extra Small (12px)</p>
+            <p class="text-sm">Small (14px)</p>
+            <p class="text-base">Base (16px - minimum for mobile)</p>
+            <p class="text-lg">Large (18px)</p>
+            <p class="text-xl">Extra Large (20px)</p>
+            <p class="text-2xl">2XL (24px)</p>
+            <p class="text-4xl font-bold">4XL Heading (36px)</p>
+        </div>
+    </section>
+
+    <footer class="mt-16 pt-8 border-t border-border">
+        <p class="text-muted-foreground">
+            AquaSense Design System - Tailwind Configuration Task 1.5 ✅
+        </p>
+    </footer>
+</body>
+</html>

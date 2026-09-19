@@ -1,0 +1,181 @@
+{
+  "common": {
+    "appName": "AquaSense",
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "login": "Login",
+    "loginDescription": "Enter your credentials to access your account",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "invalidCredentials": "Invalid credentials",
+    "loginSuccess": "Login successful",
+    "logoutSuccess": "You have been logged out"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "shifts": "Shifts",
+    "leave": "Leave",
+    "incidents": "Incidents",
+    "cleaning": "Cleaning",
+    "clock": "Time Tracking"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "managerDashboard": "Manager Dashboard",
+    "staffDashboard": "Staff Dashboard",
+    "todaysShifts": "Today's Shifts",
+    "pendingLeave": "Pending Leave Requests",
+    "openIncidents": "Open Incidents",
+    "cleaningTasks": "Cleaning Tasks",
+    "clockInOut": "Time Tracking",
+    "myShifts": "My Shifts",
+    "myLeaveRequests": "My Leave Requests"
+  },
+  "shifts": {
+    "title": "Shifts",
+    "createShift": "Create Shift",
+    "editShift": "Edit Shift",
+    "deleteShift": "Delete Shift",
+    "date": "Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "assignedTo": "Assigned To",
+    "notes": "Notes",
+    "noShifts": "No shifts found"
+  },
+  "leave": {
+    "title": "Leave Requests",
+    "createRequest": "Create Request",
+    "type": "Type",
+    "sick": "Sick",
+    "vacation": "Vacation",
+    "status": "Status",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "reason": "Reason",
+    "approve": "Approve",
+    "reject": "Reject",
+    "noRequests": "No leave requests"
+  },
+  "incidents": {
+    "title": "Incidents",
+    "reportIncident": "Report Incident",
+    "incidentTitle": "Title",
+    "description": "Description",
+    "severity": "Severity",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "status": "Status",
+    "open": "Open",
+    "closed": "Closed",
+    "locked": "Locked",
+    "lockIncident": "Lock Incident",
+    "uploadImage": "Upload Image",
+    "noIncidents": "No incidents"
+  },
+  "clock": {
+    "title": "Time Tracking",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "currentSession": "Current Session",
+    "sessionStart": "Session Started",
+    "noActiveSession": "No active session",
+    "clockInSuccess": "Successfully clocked in",
+    "clockOutSuccess": "Successfully clocked out",
+    "history": "History"
+  },
+  "cleaning": {
+    "title": "Cleaning Tasks",
+    "createTask": "Create Task",
+    "taskTitle": "Task Title",
+    "frequency": "Frequency",
+    "lastCompleted": "Last Completed",
+    "markComplete": "Mark Complete",
+    "completedBy": "Completed By",
+    "noTasks": "No cleaning tasks"
+  },
+  "language": {
+    "select": "Select Language",
+    "danish": "Danish",
+    "english": "English"
+  },
+  "errors": {
+    "unexpected": "An unexpected error occurred",
+    "tryAgain": "Please try again",
+    "somethingWentWrong": "Something went wrong",
+    "networkError": "Network error. Please check your connection.",
+    "serverError": "Server error. Please try again later.",
+    "unauthorized": "You are not authorized to perform this action",
+    "notFound": "The requested resource was not found",
+    "validationError": "Please check your input and try again",
+    "refreshPage": "Please refresh the page"
+  },
+  "landing": {
+    "hero": {
+      "headline": "Professional Pool Management Made Simple",
+      "subheadline": "AquaSense helps swimming pool operators streamline operations, manage staff, and ensure safety with ease.",
+      "ctaText": "Get Started",
+      "secondaryCtaText": "Learn More"
+    },
+    "story": {
+      "title": "Your Day with AquaSense",
+      "subtitle": "Follow the operational journey from morning setup to closing time",
+      "morning": {
+        "time": "07:00",
+        "title": "Morning Setup",
+        "description": "Start your day with automated checklists and equipment checks. AquaSense guides you through essential safety procedures and water quality testing, ensuring everything is ready before opening."
+      },
+      "daytime": {
+        "time": "10:00",
+        "title": "Daytime Operations",
+        "description": "Monitor pool operations in real-time with live dashboards. Track visitor counts, water chemistry, and staff schedules from any device. Stay informed and responsive throughout the day."
+      },
+      "incident": {
+        "time": "14:30",
+        "title": "Incident Handling",
+        "description": "Quickly document and respond to any incidents with our mobile-friendly reporting system. Capture photos, record details, and notify management instantly for swift resolution."
+      },
+      "closing": {
+        "time": "20:00",
+        "title": "Closing Procedures",
+        "description": "Complete end-of-day tasks efficiently with guided closing checklists. Record final readings, secure equipment, and generate automated reports for tomorrow's team."
+      }
+    },
+    "showcase": {
+      "title": "Purpose-Built for Pools",
+      "subtitle": "Experience the AquaSense interface designed specifically for swimming pool operations",
+      "dashboard": "Dashboard overview showing real-time pool operations",
+      "shifts": "Shift planning interface with staff scheduling",
+      "incidents": "Incident reporting system with mobile support"
+    }
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "copyright": "All rights reserved."
+  }
+}

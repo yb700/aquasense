@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* AquaSense Design System - Light Mode Colors */
+    
+    /* Primary: Deep Ocean (#0A3D62) - Trustworthy, stable, professional */
+    --primary: 201 85% 21%;              
+    --primary-foreground: 210 40% 98%;
+    
+    /* Secondary: Pool Blue (#1B7FBD) - Energetic, clear, refreshing */
+    --secondary: 202 74% 42%;            
+    --secondary-foreground: 210 40% 98%;
+    
+    /* Accent: Aqua (#4DD0E1) - Vibrant, modern, interactive */
+    --accent: 187 71% 58%;               
+    --accent-foreground: 201 85% 21%;
+    
+    /* Highlight: Fresh Mint (#76E4C3) - Success, completion */
+    --highlight: 166 73% 68%;
+    
+    /* Background colors */
+    --background: 195 64% 97%;           /* Light bg #F7FBFC */
+    --foreground: 207 61% 16%;           /* Dark text #102A43 */
+    
+    /* Surface colors */
+    --card: 0 0% 100%;                   /* White surface */
+    --card-foreground: 207 61% 16%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 207 61% 16%;
+    
+    /* Muted colors */
+    --muted: 205 26% 50%;                /* Muted #627D98 */
+    --muted-foreground: 205 26% 50%;
+    
+    /* Destructive/Error colors */
+    --destructive: 0 70% 50%;            /* Error red */
+    --destructive-foreground: 210 40% 98%;
+    
+    /* Border and input */
+    --border: 206 31% 87%;               /* Light border */
+    --input: 206 31% 87%;
+    
+    /* Focus ring - using Aqua accent */
+    --ring: 187 71% 58%;
+    
+    /* Border radius - softer, more rounded */
+    --radius: 0.75rem;                   /* 12px - increased for aquatic feel */
+  }
+
+  .dark {
+    /* AquaSense Design System - Dark Mode Colors */
+    
+    /* Primary: Lighter for dark background */
+    --primary: 199 69% 61%;              /* Lighter pool blue #4FC3F7 */
+    --primary-foreground: 207 61% 16%;
+    
+    /* Secondary: Lighter for contrast */
+    --secondary: 199 91% 57%;            /* #29B6F6 */
+    --secondary-foreground: 210 40% 98%;
+    
+    /* Accent: Maintains vibrancy */
+    --accent: 187 71% 58%;               /* Aqua #4DD0E1 */
+    --accent-foreground: 201 85% 21%;
+    
+    /* Highlight: Fresh mint maintained */
+    --highlight: 166 73% 68%;
+    
+    /* Background: Deep ocean night */
+    --background: 206 48% 11%;           /* #0B1F2E */
+    --foreground: 195 100% 94%;          /* Light text #E3F2FD */
+    
+    /* Surface: Elevated ocean depth */
+    --card: 204 36% 18%;                 /* Surface #1E3A4F */
+    --card-foreground: 195 100% 94%;
+    
+    --popover: 204 36% 18%;
+    --popover-foreground: 195 100% 94%;
+    
+    /* Muted: Adjusted for dark */
+    --muted: 203 33% 24%;
+    --muted-foreground: 199 100% 84%;    /* #B3E5FC */
+    
+    /* Destructive: Darker red for dark mode */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    
+    /* Border and input: Subtle in dark */
+    --border: 204 36% 18%;
+    --input: 203 33% 24%;
+    
+    /* Focus ring: More prominent in dark */
+    --ring: 187 71% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Mobile-first design with minimum 44px touch targets */
+@layer components {
+  .touch-target {
+    @apply min-h-touch min-w-touch;
+  }
+}

@@ -1,0 +1,218 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Enums
+enum Role {
+  MANAGER
+  STAFF
+}
+
+enum LeaveType {
+  SICK
+  VACATION
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum IncidentStatus {
+  OPEN
+  CLOSED
+}
+
+enum SwapStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+// Models
+model Organization {
+  id            String         @id @default(cuid())
+  name          String
+  users         User[]
+  shifts        Shift[]
+  leaveRequests LeaveRequest[]
+  clockEntries  ClockEntry[]
+  incidents     Incident[]
+  cleaningTasks CleaningTask[]
+  cleaningLogs  CleaningLog[]
+  swapRequests  SwapRequest[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model User {
+  id             String         @id @default(cuid())
+  name           String
+  email          String         @unique
+  passwordHash   String
+  role           Role
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  shifts         Shift[]
+  leaveRequests  LeaveRequest[]
+  clockEntries   ClockEntry[]
+  incidents             Incident[]
+  cleaningLogs          CleaningLog[]
+  swapRequestsInitiated SwapRequest[]  @relation("SwapRequester")
+  swapRequestsTargeted  SwapRequest[]  @relation("SwapTargetUser")
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  @@index([organizationId])
+  @@index([email])
+}
+
+model Shift {
+  id                    String        @id @default(cuid())
+  userId                String?
+  user                  User?         @relation(fields: [userId], references: [id])
+  organizationId        String
+  organization          Organization  @relation(fields: [organizationId], references: [id])
+  date                  DateTime      @db.Date
+  startTime             DateTime      @db.Time
+  endTime               DateTime      @db.Time
+  notes                 String?
+  isRoutine             Boolean       @default(false)
+  swapRequestsInitiated SwapRequest[] @relation("ShiftToSwap")
+  swapRequestsTargeted  SwapRequest[] @relation("OfferedShiftToSwap")
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([date])
+}
+
+model LeaveRequest {
+  id             String       @id @default(cuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  type           LeaveType
+  status         LeaveStatus
+  startDate      DateTime     @db.Date
+  endDate        DateTime     @db.Date
+  reason         String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([status])
+}
+
+model ClockEntry {
+  id             String       @id @default(cuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  clockInTime    DateTime
+  clockOutTime   DateTime?
+  clockInLat     Float?
+  clockInLng     Float?
+  clockOutLat    Float?
+  clockOutLng    Float?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([clockInTime])
+}
+
+model Incident {
+  id             String         @id @default(cuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+  organizationId String
+  organization   Organization   @relation(fields: [organizationId], references: [id])
+  title          String
+  description    String         @db.Text
+  severity       Severity
+  status         IncidentStatus
+  imageUrl       String?
+  locked         Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([locked])
+}
+
+model CleaningTask {
+  id             String        @id @default(cuid())
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  title          String
+  frequency      String
+  logs           CleaningLog[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([organizationId])
+}
+
+model CleaningLog {
+  id             String       @id @default(cuid())
+  taskId         String
+  task           CleaningTask @relation(fields: [taskId], references: [id])
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  completedAt    DateTime     @default(now())
+
+  @@index([organizationId])
+  @@index([taskId])
+  @@index([completedAt])
+}
+
+model SwapRequest {
+  id               String       @id @default(cuid())
+  organizationId   String
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  
+  shiftId          String
+  shift            Shift        @relation("ShiftToSwap", fields: [shiftId], references: [id])
+  
+  requesterId      String
+  requester        User         @relation("SwapRequester", fields: [requesterId], references: [id])
+  
+  targetUserId     String?
+  targetUser       User?        @relation("SwapTargetUser", fields: [targetUserId], references: [id])
+  
+  offeredShiftId   String?
+  offeredShift     Shift?       @relation("OfferedShiftToSwap", fields: [offeredShiftId], references: [id])
+  
+  status           SwapStatus   @default(PENDING)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([shiftId])
+  @@index([requesterId])
+  @@index([targetUserId])
+}

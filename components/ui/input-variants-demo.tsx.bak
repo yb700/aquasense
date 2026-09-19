@@ -1,0 +1,237 @@
+"use client"
+
+import * as React from "react"
+import { Input } from "./input"
+import { Textarea } from "./textarea"
+import { SimpleSelectOption } from "./simple-select"
+import { DateInput } from "./date-input"
+import { Mail, User } from "lucide-react"
+
+/**
+ * Demo component showcasing the input variant components
+ * 
+ * This file demonstrates:
+ * - Textarea with rows and maxLength
+ * - SimpleSelect with options array
+ * - DateInput with min, max, and format props
+ * - Consistent styling across all variants
+ * - Focus, error, and disabled states
+ */
+
+export function InputVariantsDemo() {
+  const [textareaValue, setTextareaValue] = React.useState("")
+  const [selectValue, setSelectValue] = React.useState("")
+  const [dateValue, setDateValue] = React.useState("")
+
+  const roleOptions: SimpleSelectOption[] = [
+    { value: "admin", label: "Administrator" },
+    { value: "manager", label: "Manager" },
+    { value: "staff", label: "Staff Member" },
+    { value: "readonly", label: "Read Only", disabled: false },
+  ]
+
+  const poolOptions: SimpleSelectOption[] = [
+    { value: "main", label: "Main Pool" },
+    { value: "kids", label: "Kids Pool" },
+    { value: "therapy", label: "Therapy Pool" },
+  ]
+
+  return (
+    <div className="w-full max-w-2xl mx-auto p-8 space-y-12">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">Input Variants Demo</h1>
+        <p className="text-muted-foreground">
+          Showcasing textarea, select, and date-input components that extend the base Input component.
+        </p>
+      </div>
+
+      {/* Base Input for comparison */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Base Input (for reference)</h2>
+        <div className="grid gap-6">
+          <Input
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            icon={<Mail className="h-4 w-4" />}
+            helperText="We'll never share your email with anyone else."
+          />
+          <Input
+            label="Username"
+            placeholder="johndoe"
+            icon={<User className="h-4 w-4" />}
+            error="Username is already taken"
+          />
+        </div>
+      </section>
+
+      {/* Textarea Variants */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Textarea Component</h2>
+        <div className="grid gap-6">
+          <Textarea
+            label="Description"
+            placeholder="Enter a detailed description..."
+            rows={3}
+            helperText="Provide as much detail as possible."
+            value={textareaValue}
+            onChange={(e) => setTextareaValue(e.target.value)}
+          />
+          
+          <Textarea
+            label="Comments (with character limit)"
+            placeholder="Your comments..."
+            rows={5}
+            maxLength={200}
+            showCharacterCount
+            helperText="Maximum 200 characters allowed."
+          />
+          
+          <Textarea
+            label="Notes"
+            placeholder="Additional notes..."
+            rows={4}
+            variant="filled"
+          />
+          
+          <Textarea
+            label="Error State"
+            placeholder="This field has an error..."
+            rows={3}
+            error="This field is required and must be at least 10 characters."
+          />
+          
+          <Textarea
+            label="Disabled State"
+            placeholder="This field is disabled..."
+            rows={3}
+            disabled
+            defaultValue="This textarea is disabled"
+          />
+        </div>
+      </section>
+
+      {/* SimpleSelect Variants */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">SimpleSelect Component</h2>
+        <div className="grid gap-6">
+          <Select
+            label="User Role"
+            placeholder="Select a role..."
+            options={roleOptions}
+            helperText="Choose the appropriate role for this user."
+            value={selectValue}
+            onChange={(e) => setSelectValue(e.target.value)}
+          />
+          
+          <Select
+            label="Pool Assignment"
+            options={poolOptions}
+            icon={<User className="h-4 w-4" />}
+            helperText="Select which pool this applies to."
+          />
+          
+          <Select
+            label="Priority Level"
+            options={[
+              { value: "low", label: "Low" },
+              { value: "medium", label: "Medium" },
+              { value: "high", label: "High" },
+              { value: "critical", label: "Critical" },
+            ]}
+            variant="filled"
+          />
+          
+          <Select
+            label="Error State"
+            placeholder="Select an option..."
+            options={roleOptions}
+            error="You must select a role to continue."
+          />
+          
+          <Select
+            label="Disabled State"
+            options={roleOptions}
+            disabled
+            defaultValue="manager"
+          />
+        </div>
+      </section>
+
+      {/* DateInput Variants */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">DateInput Component</h2>
+        <div className="grid gap-6">
+          <DateInput
+            label="Start Date"
+            helperText="Select when the shift begins."
+            value={dateValue}
+            onChange={(e) => setDateValue(e.target.value)}
+          />
+          
+          <DateInput
+            label="Birth Date"
+            max="2010-12-31"
+            helperText="Must be born before 2011."
+          />
+          
+          <DateInput
+            label="Appointment Date"
+            min={new Date().toISOString().split('T')[0]}
+            helperText="Must be a future date."
+            showIcon={true}
+          />
+          
+          <DateInput
+            label="Filled Variant"
+            variant="filled"
+          />
+          
+          <DateInput
+            label="Error State"
+            error="The selected date is not available."
+          />
+          
+          <DateInput
+            label="Disabled State"
+            disabled
+            defaultValue="2024-01-15"
+          />
+          
+          <DateInput
+            label="Without Icon"
+            showIcon={false}
+            helperText="Date input without calendar icon."
+          />
+        </div>
+      </section>
+
+      {/* All variants side by side */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold">Consistency Check</h2>
+        <p className="text-sm text-muted-foreground mb-4">
+          All variants maintain the same height (44px min), border radius, spacing, and focus states.
+        </p>
+        <div className="grid gap-6">
+          <Input
+            label="Standard Input"
+            placeholder="Text input..."
+          />
+          <Select
+            label="Select Input"
+            placeholder="Select option..."
+            options={roleOptions}
+          />
+          <DateInput
+            label="Date Input"
+          />
+          <Textarea
+            label="Textarea Input"
+            rows={1}
+            placeholder="Textarea with single row..."
+          />
+        </div>
+      </section>
+    </div>
+  )
+}

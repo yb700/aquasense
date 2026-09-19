@@ -1,0 +1,300 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+
+/**
+ * Leave Request Form Component (Client Component)
+ * 
+ * Provides a form for staff and managers to create leave requests with:
+ * - Type selector (SICK or VACATION)
+ * - Date range picker (start date and end date)
+ * - Reason textarea
+ * 
+ * Features:
+ * - Form validation with Zod
+ * - Bilingual labels and validation messages
+ * - Toast notifications for success/error
+ * - Mobile-first design with 44x44px touch targets
+ * 
+ * Requirements:
+ * - 5.1: Create leave request with type, dates, reason
+ * - 5.5: Support SICK and VACATION types
+ * - 11.2: Touch targets at least 44x44 pixels
+ * - 12.3: Bilingual labels and validation
+ */
+
+// Form validation schema
+const leaveFormSchema = z.object({
+  type: z.enum(['SICK', 'VACATION'], {
+    message: 'Please select a leave type',
+  }),
+  startDate: z.date({
+    message: 'Start date is required',
+  }),
+  endDate: z.date({
+    message: 'End date is required',
+  }),
+  reason: z.string().min(1, 'Reason is required').max(500, 'Reason must be less than 500 characters'),
+}).refine((data) => {
+  // Validate that end date is not before start date
+  return data.endDate >= data.startDate;
+}, {
+  message: 'End date must not be before start date',
+  path: ['endDate'],
+});
+
+type LeaveFormValues = z.infer<typeof leaveFormSchema>;
+
+export function LeaveForm() {
+  const router = useRouter();
+  const t = useTranslations('leave');
+  const tCommon = useTranslations('common');
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Initialize form with default values
+  const form = useForm<LeaveFormValues>({
+    resolver: zodResolver(leaveFormSchema),
+    defaultValues: {
+      type: 'SICK',
+      startDate: new Date(),
+      endDate: new Date(),
+      reason: '',
+    },
+  });
+
+  /**
+   * Handle form submission
+   * - Calls POST /api/leave endpoint
+   * - Displays success/error toast
+   * - Refreshes page data on success
+   */
+  const onSubmit = async (values: LeaveFormValues) => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/leave', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: values.type,
+          startDate: format(values.startDate, 'yyyy-MM-dd'),
+          endDate: format(values.endDate, 'yyyy-MM-dd'),
+          reason: values.reason,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: data.error || 'Failed to create leave request',
+        });
+        return;
+      }
+
+      // Display success toast
+      toast({
+        title: 'Leave request created',
+        description: 'Your leave request has been submitted and is pending approval',
+      });
+
+      // Reset form
+      form.reset();
+
+      // Refresh page to show new leave request
+      router.refresh();
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'An unexpected error occurred. Please try again.',
+      });
+      console.error('Leave request form error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        {/* Leave Type Selector */}
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('type')}</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value} disabled={isLoading}>
+                <FormControl>
+                  <SelectTrigger className="h-11">
+                    <SelectValue placeholder="Select leave type" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="SICK">{t('sick')}</SelectItem>
+                  <SelectItem value="VACATION">{t('vacation')}</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Date Range Pickers */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="startDate"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('startDate')}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="secondary"
+                        className={cn(
+                          'h-11 w-full pl-3 text-left font-normal',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                        disabled={isLoading}
+                      >
+                        {field.value ? (
+                          format(field.value, 'PPP')
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="endDate"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>{t('endDate')}</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="secondary"
+                        className={cn(
+                          'h-11 w-full pl-3 text-left font-normal',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                        disabled={isLoading}
+                      >
+                        {field.value ? (
+                          format(field.value, 'PPP')
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        {/* Reason Textarea */}
+        <FormField
+          control={form.control}
+          name="reason"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('reason')}</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Provide a reason for your leave request..."
+                  className="resize-none"
+                  rows={3}
+                  disabled={isLoading}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Submit Button */}
+        <Button 
+          type="submit" 
+          className="w-full h-11"
+          disabled={isLoading}
+        >
+          {isLoading ? tCommon('loading') : t('createRequest')}
+        </Button>
+      </form>
+    </Form>
+  );
+}

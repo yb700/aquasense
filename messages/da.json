@@ -1,0 +1,181 @@
+{
+  "common": {
+    "appName": "AquaSense",
+    "welcome": "Velkommen",
+    "loading": "Indlæser...",
+    "save": "Gem",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "edit": "Rediger",
+    "create": "Opret",
+    "submit": "Send",
+    "back": "Tilbage",
+    "next": "Næste",
+    "previous": "Forrige",
+    "search": "Søg",
+    "filter": "Filtrer",
+    "clear": "Ryd",
+    "confirm": "Bekræft",
+    "yes": "Ja",
+    "no": "Nej"
+  },
+  "auth": {
+    "login": "Log ind",
+    "loginDescription": "Indtast dine legitimationsoplysninger for at få adgang til din konto",
+    "logout": "Log ud",
+    "email": "E-mail",
+    "password": "Adgangskode",
+    "forgotPassword": "Glemt adgangskode?",
+    "invalidCredentials": "Ugyldige loginoplysninger",
+    "loginSuccess": "Login gennemført",
+    "logoutSuccess": "Du er nu logget ud"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "shifts": "Vagter",
+    "leave": "Fravær",
+    "incidents": "Hændelser",
+    "cleaning": "Rengøring",
+    "clock": "Tidsregistrering"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "managerDashboard": "Leder Dashboard",
+    "staffDashboard": "Medarbejder Dashboard",
+    "todaysShifts": "Dagens vagter",
+    "pendingLeave": "Afventende fraværsanmodninger",
+    "openIncidents": "Åbne hændelser",
+    "cleaningTasks": "Rengøringsopgaver",
+    "clockInOut": "Tidsregistrering",
+    "myShifts": "Mine vagter",
+    "myLeaveRequests": "Mine fraværsanmodninger"
+  },
+  "shifts": {
+    "title": "Vagter",
+    "createShift": "Opret vagt",
+    "editShift": "Rediger vagt",
+    "deleteShift": "Slet vagt",
+    "date": "Dato",
+    "startTime": "Starttidspunkt",
+    "endTime": "Sluttidspunkt",
+    "assignedTo": "Tildelt til",
+    "notes": "Noter",
+    "noShifts": "Ingen vagter fundet"
+  },
+  "leave": {
+    "title": "Fraværsanmodninger",
+    "createRequest": "Opret anmodning",
+    "type": "Type",
+    "sick": "Syg",
+    "vacation": "Ferie",
+    "status": "Status",
+    "pending": "Afventer",
+    "approved": "Godkendt",
+    "rejected": "Afvist",
+    "startDate": "Startdato",
+    "endDate": "Slutdato",
+    "reason": "Årsag",
+    "approve": "Godkend",
+    "reject": "Afvis",
+    "noRequests": "Ingen fraværsanmodninger"
+  },
+  "incidents": {
+    "title": "Hændelser",
+    "reportIncident": "Rapporter hændelse",
+    "incidentTitle": "Titel",
+    "description": "Beskrivelse",
+    "severity": "Alvorlighed",
+    "low": "Lav",
+    "medium": "Mellem",
+    "high": "Høj",
+    "status": "Status",
+    "open": "Åben",
+    "closed": "Lukket",
+    "locked": "Låst",
+    "lockIncident": "Lås hændelse",
+    "uploadImage": "Upload billede",
+    "noIncidents": "Ingen hændelser"
+  },
+  "clock": {
+    "title": "Tidsregistrering",
+    "clockIn": "Stem ind",
+    "clockOut": "Stem ud",
+    "currentSession": "Aktiv session",
+    "sessionStart": "Session startet",
+    "noActiveSession": "Ingen aktiv session",
+    "clockInSuccess": "Du er stemplet ind",
+    "clockOutSuccess": "Du er stemplet ud",
+    "history": "Historik"
+  },
+  "cleaning": {
+    "title": "Rengøringsopgaver",
+    "createTask": "Opret opgave",
+    "taskTitle": "Opgavetitel",
+    "frequency": "Frekvens",
+    "lastCompleted": "Sidst udført",
+    "markComplete": "Marker som udført",
+    "completedBy": "Udført af",
+    "noTasks": "Ingen rengøringsopgaver"
+  },
+  "language": {
+    "select": "Vælg sprog",
+    "danish": "Dansk",
+    "english": "Engelsk"
+  },
+  "errors": {
+    "unexpected": "Der opstod en uventet fejl",
+    "tryAgain": "Prøv venligst igen",
+    "somethingWentWrong": "Noget gik galt",
+    "networkError": "Netværksfejl. Tjek venligst din forbindelse.",
+    "serverError": "Serverfejl. Prøv igen senere.",
+    "unauthorized": "Du har ikke tilladelse til at udføre denne handling",
+    "notFound": "Den ønskede ressource blev ikke fundet",
+    "validationError": "Tjek venligst dit input og prøv igen",
+    "refreshPage": "Genindlæs venligst siden"
+  },
+  "landing": {
+    "hero": {
+      "headline": "Professionel Poolstyring Gjort Enkel",
+      "subheadline": "AquaSense hjælper svømmebassinsoperatører med at strømline driften, styre personale og sikre sikkerheden med lethed.",
+      "ctaText": "Kom i Gang",
+      "secondaryCtaText": "Lær Mere"
+    },
+    "story": {
+      "title": "Din Dag med AquaSense",
+      "subtitle": "Følg den operationelle rejse fra morgenen opstilling til lukketid",
+      "morning": {
+        "time": "07:00",
+        "title": "Morgen Opstilling",
+        "description": "Start din dag med automatiserede checklister og udstyrskontrol. AquaSense guider dig gennem væsentlige sikkerhedsprocedurer og vandkvalitetstest for at sikre, at alt er klar inden åbning."
+      },
+      "daytime": {
+        "time": "10:00",
+        "title": "Daglig Drift",
+        "description": "Overvåg pooldrift i realtid med live dashboards. Spor besøgstal, vandkemi og personaleplaner fra enhver enhed. Forbliv informeret og reaktionsdygtig hele dagen."
+      },
+      "incident": {
+        "time": "14:30",
+        "title": "Hændelseshåndtering",
+        "description": "Dokumentér og reager hurtigt på enhver hændelse med vores mobilvenlige rapporteringssystem. Tag billeder, registrer detaljer og underret ledelsen øjeblikkeligt for hurtig løsning."
+      },
+      "closing": {
+        "time": "20:00",
+        "title": "Lukningsprocedurer",
+        "description": "Gennemfør dagens afsluttende opgaver effektivt med guidede lukningschecklister. Registrer endelige aflæsninger, sikre udstyr og generer automatiserede rapporter til morgendagens team."
+      }
+    },
+    "showcase": {
+      "title": "Specielt Designet til Pools",
+      "subtitle": "Oplev AquaSense-grænsefladen designet specifikt til svømmebassindrift",
+      "dashboard": "Dashboard-oversigt der viser pool-operationer i realtid",
+      "shifts": "Vagtplanlægningsgrænseflade med personaleplan",
+      "incidents": "Hændelsesrapporteringssystem med mobilunderstøttelse"
+    }
+  },
+  "footer": {
+    "privacy": "Privatlivspolitik",
+    "terms": "Servicevilkår",
+    "contact": "Kontakt",
+    "copyright": "Alle rettigheder forbeholdes."
+  }
+}
